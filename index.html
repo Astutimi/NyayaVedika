@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyaya Vedika - Legal Excellence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .logo-font {
+            font-family: 'Philosopher', serif;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .navbar-animation {
+            animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #f4a300;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .active-nav::after {
+            width: 100%;
+        }
+
+        .slide-transition {
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* Responsive Carousel Styles */
+        #resource-carousel {
+            width: 100%;
+            display: flex;
+            scroll-snap-type: x mandatory;
+        }
+
+        #resource-carousel > div {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 0 1rem;
+            scroll-snap-align: start;
+        }
+
+        .carousel-container {
+            overflow-x: auto;
+            padding: 0 1rem;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .resource-card {
+            width: calc(100% - 2rem);
+            margin: 0 1rem 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .resource-card {
+                width: calc(50% - 2rem);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .resource-card {
+                width: calc(33.33% - 2rem);
+            }
+        }
+
+        .logo-hover {
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-hover:hover {
+    transform: scale(1.05) rotate(-3deg);
+}
+
+.logo-hover::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    animation: logoGlow 1.5s infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.logo-hover:hover::after {
+    opacity: 1;
+}
+
+@keyframes logoGlow {
+    0% { 
+        box-shadow: 0 0 10px rgba(244, 163, 0, 0.3);
+        border-color: rgba(244, 163, 0, 0.2);
+    }
+    50% { 
+        box-shadow: 0 0 20px rgba(244, 163, 0, 0.5);
+        border-color: rgba(244, 163, 0, 0.4);
+    }
+    100% { 
+        box-shadow: 0 0 10px rgba(244, 163, 0, 0.3);
+        border-color: rgba(244, 163, 0, 0.2);
+    }
+}
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #f4a300;
+            border-radius: 50%;
+            animation: particle-move 8s linear infinite;
+            filter: blur(1px);
+        }
+
+        #animated-box::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1.5rem;
+            opacity: 0;
+            transition: opacity 300ms;
+            background: radial-gradient(600px circle at var(--x) var(--y), 
+                rgba(244,163,0,0.15) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .glow-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            opacity: 0;
+            transition: opacity 300ms;
+            background: radial-gradient(200px circle at var(--bx) var(--by), 
+                rgba(255,255,255,0.3) 0%, transparent 100%);
+        }
+
+        @keyframes gradient-pulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes particle-move {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        @keyframes text-appear {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-gradient {
+            background-size: 200% auto;
+            animation: gradient-pulse 3s linear infinite;
+        }
+
+        .animate-text-in {
+            animation: text-appear 1s ease-out forwards;
+        }
+
+        .animate-list-item {
+            animation: text-appear 0.6s ease-out forwards;
+        }
+
+        .particle {
+            animation: particle-float 6s infinite;
+        }
+
+        @keyframes particle-float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+        }
+
+        .card-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 1rem;
+            opacity: 0;
+            transition: opacity 300ms;
+            background: radial-gradient(400px circle at var(--x) var(--y), 
+                rgba(244,163,0,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .card-container:hover::before {
+            opacity: 1;
+        }
+
+        .icon-wrapper {
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .card-container:hover .icon-wrapper {
+            transform: translateY(-0.5rem) rotate(-5deg);
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 0 rgba(244,163,0,0));
+            color: #ffd3ac;
+        }
+
+        .social-icon:hover {
+            filter: drop-shadow(0 0 8px rgba(244,163,0,0.4));
+            color: #f4a300;
+        }
+
+        @keyframes footer-fade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer-fade-in {
+            animation: footer-fade 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .hover\:drop-shadow-glow:hover {
+            filter: drop-shadow(0 0 12px rgba(244,163,0,0.6));
+        }
+
+        /* Mobile Menu Animation */
+        .mobile-menu {
+            max-height: 0;
+            transition: max-height 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        .mobile-menu.active {
+            max-height: 500px;
+            transition: max-height 0.3s ease-in;
+        }
+
+        /* responsive */
+        @media (min-width: 1024px) {
+            .lg-h-100 {
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#ffd3ac]">
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 bg-gradient-to-b from-[#392300] to-[#1b0e00] shadow-xl">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-4">
+                    <div class="logo-hover transform transition-all duration-300">
+                        <img src="./nyaya.png" alt="Nyaya Vedika" 
+                             class="h-12 w-12 md:h-14 md:w-14 rounded-lg border-2 border-transparent">
+                    </div>
+                    <span class="logo-font text-2xl md:text-3xl text-[#ffd3ac]">Nyaya Vedika</span>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-10">
+                    <a href="./index.html" class="text-[#f4a300] border-b-2 border-[#f4a300] text-lg">Home</a>
+                    <a href="./courses.html" class="text-[#ffd3ac] hover:text-[#f4a300] text-lg" >Courses</a>
+                    <a href="./material.html" class="text-[#ffd3ac] hover:text-[#f4a300] text-lg">Materials</a>
+                    <a href="./test.html" class="text-[#ffd3ac] hover:text-[#f4a300] text-lg">Test Series</a>
+                    <a href="./contact.html" class="text-[#ffd3ac] hover:text-[#f4a300] text-lg">Contact</a>
+                </div>
+
+                <button id="menuToggle" class="lg:hidden text-[#f4a300]">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="lg:hidden mobile-menu bg-[#1b0e00]">
+            <div class="flex flex-col space-y-4 p-4">
+                <a href="./index.html" class="text-[#f4a300]">Home</a>
+                <a href="./courses.html" class="text-[#ffd3ac] hover:text-[#f4a300]">Courses</a>
+                <a href="./material.html" class="text-[#ffd3ac] hover:text-[#f4a300]">Materials</a>
+                <a href="./test.html" class="text-[#ffd3ac] hover:text-[#f4a300]">Test Series</a>
+                <a href="./contact.html" class="text-[#ffd3ac] hover:text-[#f4a300]">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="pt-28 pb-16 px-4 md:pt-32">
+        <!-- Image Gallery -->
+        <div class="container mx-auto">
+            <div class="relative overflow-hidden rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl h-[300px] md:h-[600px] border-2 md:border-4 border-[#634000]">
+                <div id="slider" class="flex h-full transition-transform duration-500">
+                    <!-- Slide 1 -->
+                    <div class="min-w-full h-full relative">
+                        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f" 
+                             class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#1b0e00] p-8">
+                            <h2 class="text-4xl font-bold text-[#f4a300] mb-4">Constitutional Law Mastery</h2>
+                            <p class="text-[#ffd3ac] text-lg">Master the fundamentals of constitutional framework</p>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="min-w-full h-full relative">
+                        <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb" 
+                             class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#1b0e00] p-8">
+                            <h2 class="text-4xl font-bold text-[#f4a300] mb-4">Case Study Analysis</h2>
+                            <p class="text-[#ffd3ac] text-lg">Develop practical legal reasoning skills</p>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="min-w-full h-full relative">
+                        <img src="./law-school-time.jpg" 
+                             class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#1b0e00] p-8">
+                            <h2 class="text-4xl font-bold text-[#f4a300] mb-4">Exam Preparation System</h2>
+                            <p class="text-[#ffd3ac] text-lg">Comprehensive test series with analytics</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <button id="prev" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-[#1b0e00]/90 hover:bg-[#1b0e00] text-[#f4a300] p-2 md:p-4 rounded-full shadow-lg transition-all hover:scale-110">←</button>
+                <button id="next" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-[#1b0e00]/90 hover:bg-[#1b0e00] text-[#f4a300] p-2 md:p-4 rounded-full shadow-lg transition-all hover:scale-110">→</button>
+            </div>
+        </div>
+
+    </main>
+
+
+    <!-- Resources Section -->
+    <section class="py-12 md:py-16 bg-[#ffd3ac]/50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#392300] mb-8 md:mb-12 text-center logo-font">Premium Resources</h2>
+            
+            <div class="carousel-container relative group">
+                <div id="resource-carousel" class="transition-transform duration-700 ease-[cubic-bezier(0.33,1,0.68,1)]">
+                   <!-- Card Set 1 -->
+            <div class="min-w-full flex gap-8 px-4">
+                <!-- Card 1 -->
+                <div class="w-1/3 transform hover:-translate-y-4 transition-all duration-500">
+                    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden hover:shadow-2xl/50 relative group">
+                        <div class="p-6 relative">
+                            <div class="w-full h-48 bg-[#f4a300]/10 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:bg-[#f4a300]/20">
+                                <svg class="w-20 h-20 text-[#634000] transform transition-all duration-500 group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-[#1b0e00] mt-6">Constitutional Law</h3>
+                            <p class="text-[#634000] mt-2">By Adv. Deeptanshu Mishra</p>
+                            <button class="mt-6 w-full bg-[#f4a300] text-white py-3 rounded-xl font-bold hover:bg-[#c18000] transition-colors">
+                                Enroll Now - ₹1999
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="w-1/3 transform hover:-translate-y-4 transition-all duration-500">
+                    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden hover:shadow-2xl/50 relative group">
+                        <div class="p-6 relative">
+                            <div class="w-full h-48 bg-[#f4a300]/10 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:bg-[#f4a300]/20">
+                                <svg class="w-20 h-20 text-[#634000] transform transition-all duration-500 group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-[#1b0e00] mt-6">Contract Law</h3>
+                            <p class="text-[#634000] mt-2">By Adv. Shishir Verma</p>
+                            <button class="mt-6 w-full bg-[#f4a300] text-white py-3 rounded-xl font-bold hover:bg-[#c18000] transition-colors">
+                                Enroll Now - ₹2499
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="w-1/3 transform hover:-translate-y-4 transition-all duration-500">
+                    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden hover:shadow-2xl/50 relative group">
+                        <div class="p-6 relative">
+                            <div class="w-full h-48 bg-[#f4a300]/10 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:bg-[#f4a300]/20">
+                                <svg class="w-20 h-20 text-[#634000] transform transition-all duration-500 group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-[#1b0e00] mt-6">Civil Procedure</h3>
+                            <p class="text-[#634000] mt-2">By Adv. Deeptanshu Mishra</p>
+                            <button class="mt-6 w-full bg-[#f4a300] text-white py-3 rounded-xl font-bold hover:bg-[#c18000] transition-colors">
+                                Enroll Now - ₹1799
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Set 2  -->
+            <div class="min-w-full flex gap-8 px-4">
+                <!-- Card 1 -->
+                <div class="w-1/3 transform hover:-translate-y-4 transition-all duration-500">
+                    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden hover:shadow-2xl/50 relative group">
+                        <div class="p-6 relative">
+                            <div class="w-full h-48 bg-[#f4a300]/10 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:bg-[#f4a300]/20">
+                                <svg class="w-20 h-20 text-[#634000] transform transition-all duration-500 group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-[#1b0e00] mt-6">Constitutional Law</h3>
+                            <p class="text-[#634000] mt-2">By Adv. Deeptanshu Mishra</p>
+                            <button class="mt-6 w-full bg-[#f4a300] text-white py-3 rounded-xl font-bold hover:bg-[#c18000] transition-colors">
+                                Enroll Now - ₹1999
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="w-1/3 transform hover:-translate-y-4 transition-all duration-500">
+                    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden hover:shadow-2xl/50 relative group">
+                        <div class="p-6 relative">
+                            <div class="w-full h-48 bg-[#f4a300]/10 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:bg-[#f4a300]/20">
+                                <svg class="w-20 h-20 text-[#634000] transform transition-all duration-500 group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-[#1b0e00] mt-6">Contract Law</h3>
+                            <p class="text-[#634000] mt-2">By Adv. Shishir Verma</p>
+                            <button class="mt-6 w-full bg-[#f4a300] text-white py-3 rounded-xl font-bold hover:bg-[#c18000] transition-colors">
+                                Enroll Now - ₹2499
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="w-1/3 transform hover:-translate-y-4 transition-all duration-500">
+                    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden hover:shadow-2xl/50 relative group">
+                        <div class="p-6 relative">
+                            <div class="w-full h-48 bg-[#f4a300]/10 rounded-xl flex items-center justify-center transition-all duration-500 group-hover:bg-[#f4a300]/20">
+                                <svg class="w-20 h-20 text-[#634000] transform transition-all duration-500 group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-[#1b0e00] mt-6">Procedure</h3>
+                            <p class="text-[#634000] mt-2">By Adv. Shishir Verma</p>
+                            <button class="mt-6 w-full bg-[#f4a300] text-white py-3 rounded-xl font-bold hover:bg-[#c18000] transition-colors">
+                                Enroll Now - ₹1799
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+                <button id="resource-prev" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#634000] p-4 rounded-full shadow-xl transition-all opacity-0 group-hover:opacity-100 hover:scale-110">←</button>
+                <button id="resource-next" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-[#634000] p-4 rounded-full shadow-xl transition-all opacity-0 group-hover:opacity-100 hover:scale-110">→</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- banner -->
+    <section class="pt-32 pb-24 px-4 relative overflow-hidden">
+        <div class="container mx-auto">
+            <!-- Main Box -->
+            <div class="relative bg-[#ffd3ac]/90 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-[#392300]/20 
+                transform transition-all duration-1000 hover:shadow-2xl hover:border-[#f4a300]/30 cursor-pointer group"
+                id="animated-box">
+                
+                <!-- Animated Border -->
+                <div class="absolute inset-0 rounded-3xl pointer-events-none">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-[#f4a300] via-[#ffd3ac] to-[#c18000] rounded-3xl 
+                        opacity-0 group-hover:opacity-30 blur-xl animate-border-flow transition-opacity duration-300"></div>
+                </div>
+    
+                <!-- Floating Particles -->
+                <div class="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-300">
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                </div>
+    
+                <div class="flex flex-wrap items-center gap-12 p-12 relative">
+                    <!-- Text Content -->
+                    <div class="flex-1 min-w-[300px] space-y-8">
+                        <h2 class="text-6xl font-bold text-[#392300] logo-font opacity-0 animate-text-in">
+                            <span class="text-[#634000] bg-clip-text bg-gradient-to-r from-[#f4a300] to-[#c18000] animate-gradient">
+                                Transform Your Legal Career
+                            </span> ⚖️<br>
+                            <span class="text-4xl mt-4 block">10 Days to Supreme Confidence</span>
+                        </h2>
+                        
+                        <ul class="space-y-6">
+                            <li class="flex items-center gap-4 opacity-0 animate-list-item">
+                                <div class="p-3 bg-[#f4a300] rounded-full shadow-lg transform hover:rotate-12 transition-all">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-[#1b0e00]">Daily Live Mocks</h3>
+                                    <p class="text-[#634000]">Real-time practice with AI-powered analysis</p>
+                                </div>
+                            </li>
+                            <!-- Add 3 more list items with different icons -->
+                        </ul>
+    
+                        <button class="glow-button px-10 py-5 bg-gradient-to-r from-[#f4a300] to-[#c18000] text-white text-xl 
+                                rounded-2xl font-bold hover:scale-105 transition-transform duration-300 relative overflow-hidden">
+                            <span class="relative z-10">🚀 Start Free Trial</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-[#ffd3ac] to-[#f4a300] opacity-0 hover:opacity-20 transition-opacity"></div>
+                        </button>
+                    </div>
+    
+                    <!-- Video Embed -->
+                    <div class="flex-1 min-w-[300px] relative group transform hover:scale-[1.02] transition-transform">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-[#392300]/10 
+                            hover:border-[#f4a300]/50 transition-border duration-300">
+                            <iframe class="w-full aspect-video scale-95 group-hover:scale-100 transition-transform" 
+                                src="https://www.youtube.com/embed/your-video-id" 
+                                frameborder="0"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="absolute -inset-4 bg-[#f4a300]/10 rounded-3xl -z-10 group-hover:rotate-2 transition-transform"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- features -->
+    <section class="py-20 px-4 bg-[#ffd3ac] relative overflow-hidden">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card-container group relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-[#392300]/10 hover:border-[#f4a300]/30 transition-all duration-500 cursor-pointer">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#f4a300]/0 to-[#f4a300]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="icon-wrapper mb-6 w-16 h-16 bg-[#f4a300]/10 rounded-2xl flex items-center justify-center transform group-hover:-translate-y-2 transition-all duration-500">
+                            <svg class="w-10 h-10 text-[#634000] group-hover:text-[#f4a300] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-[#392300] mb-4">Live Classes</h3>
+                        <p class="text-[#634000] opacity-90">Engage with educators, ask questions, participate in live polls, and clear your doubts – all in real-time during the class.</p>
+                    </div>
+                    
+                    <!-- Floating Particles -->
+                    <div class="particles absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                </div>
+    
+                <!-- Card 2 -->
+                <div class="card-container group relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-[#392300]/10 hover:border-[#f4a300]/30 transition-all duration-500 cursor-pointer">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#f4a300]/0 to-[#f4a300]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="icon-wrapper mb-6 w-16 h-16 bg-[#f4a300]/10 rounded-2xl flex items-center justify-center transform group-hover:-translate-y-2 transition-all duration-500">
+                            <svg class="w-10 h-10 text-[#634000] group-hover:text-[#f4a300] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-[#392300] mb-4">Daily Dispatch & MCQs</h3>
+                        <p class="text-[#634000] opacity-90">Learning goes beyond the classroom with our practice section, mock tests, and PDF lecture notes provided for your revision.</p>
+                    </div>
+                    
+                    <!-- Floating Particles -->
+                    <div class="particles absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                </div>
+    
+                <!-- Card 3 -->
+                <div class="card-container group relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-[#392300]/10 hover:border-[#f4a300]/30 transition-all duration-500 cursor-pointer">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#f4a300]/0 to-[#f4a300]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="icon-wrapper mb-6 w-16 h-16 bg-[#f4a300]/10 rounded-2xl flex items-center justify-center transform group-hover:-translate-y-2 transition-all duration-500">
+                            <svg class="w-10 h-10 text-[#634000] group-hover:text-[#f4a300] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-[#392300] mb-4">Learning Everywhere</h3>
+                        <p class="text-[#634000] opacity-90">A single subscription gives you access to all our live and recorded classes, available to watch anytime on any of your devices.</p>
+                    </div>
+                    
+                    <!-- Floating Particles -->
+                    <div class="particles absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative bg-gradient-to-b from-[#392300] to-[#1b0e00] text-[#ffd3ac] pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <img src="./nyaya.png" alt="Logo" class="h-14 w-14 rounded-lg border-2 border-[#f4a300]">
+                        <span class="logo-font text-2xl">Nyaya Vedika</span>
+                    </div>
+                    <p class="italic opacity-80">"Law and justice are not always the same."</p>
+                    <div class="flex space-x-4 mt-4">
+                        <!-- Telegram -->
+                        <a href="https://t.me/nyayavedika" class="social-icon transform hover:scale-110 transition-all" target="_blank">
+                            <svg class="w-8 h-8 hover:drop-shadow-glow" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M9.993 15.674l-.401 4.276c.574 0 .824-.248 1.125-.547l2.694-2.559 5.59 4.07c1.025.564 1.758.27 2.048-.95l3.714-17.347c.347-1.6-.58-2.226-1.621-1.84L1.563 9.035c-1.566.612-1.55 1.487-.27 1.88l4.682 1.463L18.572 5.94c.69-.416 1.316-.19.801.227z"/>
+                            </svg>
+                        </a>
+                        
+    
+                        <!-- Facebook -->
+                        <a href="#" class="social-icon transform hover:scale-110 transition-all" target="_blank" >
+                            <svg class="w-8 h-8 hover:drop-shadow-glow" fill="currentColor" viewBox="0 0 24 24" >
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+    
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/nyayavedika?utm_source=qr&igsh=ZG8zcmhmcnJqNnZ4" class="social-icon transform hover:scale-110 transition-all" target="_blank">
+                            <svg class="w-8 h-8 hover:drop-shadow-glow" fill="currentColor" viewBox="0 0 24 24" >
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                            </svg>
+                        </a>
+    
+                        <!-- LinkedIn -->
+                        <a href="#" class="social-icon transform hover:scale-110 transition-all" target="_blank">
+                            <svg class="w-8 h-8 hover:drop-shadow-glow" fill="currentColor" viewBox="0 0 24 24" >
+                                <path d="M4.98 3.5C4.98 4.881 3.87 6 2.5 6S.02 4.881.02 3.5C.02 2.12 1.13 1 2.5 1s2.48 1.12 2.48 2.5zM5 8H0v16h5V8zm7.982 0H8.014v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0V24H24V13.869c0-7.88-8.922-7.593-11.018-3.714V8z"/>
+                            </svg>
+                        </a>
+    
+                        <!-- YouTube -->
+                        <a href="https://youtube.com/@nvjudiciary?si=xTRnd88DgqlWUBcN" class="social-icon transform hover:scale-110 transition-all" target="_blank">
+                            <svg class="w-8 h-8 hover:drop-shadow-glow" fill="currentColor" viewBox="0 0 24 24" >
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold mb-4 border-l-4 border-[#f4a300] pl-3">Courses</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-[#f4a300]">Constitutional Law</a></li>
+                        <li><a href="#" class="hover:text-[#f4a300]">Criminal Law</a></li>
+                        <li><a href="#" class="hover:text-[#f4a300]">Corporate Law</a></li>
+                        <li><a href="#" class="hover:text-[#f4a300]">Civil Law</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold mb-4 border-l-4 border-[#f4a300] pl-3">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-[#f4a300]">Legal Glossary</a></li>
+                        <li><a href="#" class="hover:text-[#f4a300]">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-[#f4a300]">Mock Tests</a></li>
+                        <li><a href="#" class="hover:text-[#f4a300]">Research Papers</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold mb-4 border-l-4 border-[#f4a300] pl-3">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-[#f4a300]">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-[#f4a300]">FAQs</a></li>
+                        <li><a href="#" class="hover:text-[#f4a300]">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-[#f4a300]">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-[#634000] pt-8 text-center">
+                <p class="opacity-80">&copy; 2024 Nyaya Vedika. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    
+    
+    <script>
+        // Mobile Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Image Slider
+        let currentSlide = 0;
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('#slider > .min-w-full');
+        const totalSlides = slides.length;
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        let autoSlide = setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }, 5000);
+
+        document.getElementById('next').addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+            resetInterval();
+        });
+
+        document.getElementById('prev').addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+            resetInterval();
+        });
+
+        function resetInterval() {
+            clearInterval(autoSlide);
+            autoSlide = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }, 5000);
+        }
+
+        // Resource Carousel
+        let currentPage = 0;
+        const resourceCarousel = document.getElementById('resource-carousel');
+        const resourcePages = document.querySelectorAll('#resource-carousel > div');
+        const totalPages = resourcePages.length;
+
+        document.getElementById('resource-next').addEventListener('click', () => {
+            if(currentPage < totalPages - 1) {
+                currentPage++;
+                resourceCarousel.style.transform = `translateX(-${currentPage * 100}%)`;
+            }
+        });
+
+        document.getElementById('resource-prev').addEventListener('click', () => {
+            if(currentPage > 0) {
+                currentPage--;
+                resourceCarousel.style.transform = `translateX(-${currentPage * 100}%)`;
+            }
+        });
+
+        // Initialize
+        updateSlider();
+
+
+        // banner
+        // Mouse Position Tracking
+    const box = document.getElementById('animated-box');
+    
+    box.addEventListener('mousemove', (e) => {
+        const rect = box.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Update custom properties
+        box.style.setProperty('--x', `${x}px`);
+        box.style.setProperty('--y', `${y}px`);
+    });
+
+    // Button Hover Effect
+    document.querySelectorAll('.glow-button').forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            button.style.setProperty('--bx', `${x}px`);
+            button.style.setProperty('--by', `${y}px`);
+        });
+    });
+
+    // Scroll Animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.querySelectorAll('.animate-text-in, .animate-list-item').forEach((el, index) => {
+                    el.style.animationDelay = `${index * 0.2}s`;
+                });
+            }
+        });
+    }, { threshold: 0.3 });
+
+    observer.observe(document.querySelector('#animated-box'));
+
+    // features
+     // Mouse Position Tracking
+     document.querySelectorAll('.card-container').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+        });
+    });
+
+    // Random Particle Animation
+    document.querySelectorAll('.particle').forEach(particle => {
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 2 + 's';
+        particle.style.animationDuration = 3 + Math.random() * 3 + 's';
+    });
+
+    // footer
+   // Unique footer observer
+   const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.footer-fade-in').forEach(el => {
+        el.style.opacity = 0;
+        footerObserver.observe(el);
+    });
+    </script>
+</body>
+</html>
